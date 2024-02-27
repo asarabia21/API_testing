@@ -13,6 +13,9 @@ client_secret = config.get('config', 'client_secret')
 username = config.get('config', 'username')
 password = config.get('config', 'password')
 
+#Define target username
+target_username = config.get('config', 'target_user')
+
 # Define data payload
 data = {
     "grant_type": "password",
@@ -50,7 +53,7 @@ if response.status_code == 200:
     # /user/username/upvoted
     # /user/username/overview
 
-    response = requests.get("https://oauth.reddit.com/user/Susanna-Kaysen/about", headers=headers_with_token)
+    response = requests.get(f"https://oauth.reddit.com/user/{target_username}/about", headers=headers_with_token)
 
     # Check response
     if response.status_code == 200:
