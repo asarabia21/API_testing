@@ -1,12 +1,17 @@
 import requests
+import configparser
+
+#Read the config.ini file
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 # Define client credentials
-client_id = 'sV28OCpoAAk9yG3qO4zBzg'
-client_secret = 'H9-A59F6OPjl0syThftSslR4INqwEA'
+client_id = config.get('config', 'client_id')
+client_secret = config.get('config', 'client_secret')
 
 # Define user credentials
-username = 'Intern24Vi64229'
-password = 'vividinternship24'
+username = config.get('config', 'username')
+password = config.get('config', 'password')
 
 # Define data payload
 data = {
