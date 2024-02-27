@@ -1,5 +1,6 @@
 import requests
 import configparser
+import json
 
 #Read the config.ini file
 config = configparser.ConfigParser()
@@ -13,8 +14,16 @@ client_secret = config.get('config', 'client_secret')
 username = config.get('config', 'username')
 password = config.get('config', 'password')
 
-#Define target username
+#Define target username and search parameters
 target_username = config.get('config', 'target_user')
+
+#Define the search parameters
+sort = config.get('config', 'sort')
+t = config.get('config', 'timeframe')
+limit = config.get('config', 'limit')
+
+#Define the file path
+file_path = config.get('config', 'file_path')
 
 # Define data payload
 data = {
@@ -53,12 +62,20 @@ if response.status_code == 200:
     # /user/username/upvoted
     # /user/username/overview
 
-    response = requests.get(f"https://oauth.reddit.com/user/{target_username}/about", headers=headers_with_token)
+    response = requests.get(f"https://oauth.reddit.com/user/{target_username}/comments?sort={sort}&t={t}&limit={limit}", headers=headers_with_token)
+
 
     # Check response
     if response.status_code == 200:
         user_data = response.json()
         print("User data:", user_data)
+
+        # Write the JSON data to the file
+        with open(file_path, "w") as file:
+            json.dump(user_data, file)
+
+        print("User data saved successfully.")
+
     else:
         print("Failed to retrieve user data. Response code:", response.status_code)
 
