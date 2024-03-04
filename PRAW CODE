@@ -1,0 +1,44 @@
+import praw
+
+# Initialize Reddit API wrapper
+reddit = praw.Reddit(client_id='ZuAgw3guzQNzS8w1_r428A',
+                     client_secret='vkUwQft4SY2cXyX7sKu2Pj0GNawttQ',
+                     user_agent='test by u/AdditionalOne3926')
+
+# Define a function to fetch a user's posts
+def fetch_user_posts(username, post_limit=10):
+    user = reddit.redditor(username)
+    print(f"\nFetching posts from u/{username}:")
+    for submission in user.submissions.new(limit=post_limit):
+        print(submission.title)
+
+# Define a function to fetch a user's comments
+def fetch_user_comments(username, comment_limit=10):
+    user = reddit.redditor(username)
+    print(f"\nFetching comments from u/{username}:")
+    for comment in user.comments.new(limit=comment_limit):
+        print(comment.body)
+
+# Define a function to fetch a user's subscribed subreddits
+def fetch_user_subscriptions(username):
+    user = reddit.redditor(username)
+    print(f"\nFetching subscribed subreddits of u/{username}:")
+    for subscription in user.subreddits():
+        print(subscription.display_name)
+
+# Main function to execute the script
+def main():
+    username = 'Kananaskis_Country'
+
+    # Fetch posts from a user
+    fetch_user_posts(username)
+
+    # Fetch comments from a user
+    fetch_user_comments(username)
+
+    # Fetch subscribed subreddits of a user
+    fetch_user_subscriptions(username)
+
+# Execute the main function
+if __name__ == "__main__":
+    main()
