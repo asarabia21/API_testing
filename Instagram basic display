@@ -1,0 +1,26 @@
+import requests
+
+# Define your access token
+access_token = 'IGQWRPWGc5VTFfcUp2YnhZAZAnk5YWlRRFMtODlzNTNvdmxCVUJUcFJYeHFjbmdkblQ0VkxNOENyVWNzU2FoSG5jUEJMclg1S0pQT1FDY1A2T2U5TllfS0xIV3ZA3eHVuaHlWQnZAEZAi1DMlZAHaXc4cFp4VGRmQWVJZA1UZD'
+
+# Define the endpoint for basic user information
+endpoint = 'https://graph.instagram.com/me'
+
+# Parameters to be sent with the request
+params = {
+    'fields': 'id,username',
+    'access_token': access_token
+}
+
+# Send a GET request to the endpoint with the parameters
+response = requests.get(endpoint, params=params)
+
+# Check if the request was successful
+if response.status_code == 200:
+    # Print the user's basic information
+    user_data = response.json()
+    print("User ID:", user_data['id'])
+    print("Username:", user_data['username'])
+else:
+    print("Error:", response.status_code)
+
