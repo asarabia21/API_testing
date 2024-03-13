@@ -1,0 +1,10 @@
+{
+  "target-username": "VancityReynolds",
+  "endpoints": {
+    "get-user": true,
+    "get-user-followers": true,
+    "get-user-following": true,
+    "get-user-likes": true
+  },
+  "output-file": "Reynolds"
+}
