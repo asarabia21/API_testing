@@ -1,0 +1,25 @@
+import instaloader
+
+
+def get_user_info(username):
+    L = instaloader.Instaloader()
+    profile = instaloader.Profile.from_username(L.context, username)
+
+    user_id = profile.userid
+    followers_count = profile.followers
+    following_count = profile.followees
+    post_count = profile.mediacount
+    bio = profile.biography
+    
+
+    return user_id, followers_count, following_count, post_count, bio
+
+
+
+username = "leomessi"  
+user_id, followers_count, following_count, post_count, bio = get_user_info(username)
+print("User ID:", user_id)
+print("Followers Count:", followers_count)
+print("Following Count:", following_count)
+print("Post Count:", post_count)
+print("Bio:", bio)
