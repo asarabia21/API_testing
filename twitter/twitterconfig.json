@@ -1,10 +1,13 @@
 {
   "target-username": "VancityReynolds",
   "endpoints": {
-    "get-user": true,
-    "get-user-followers": true,
-    "get-user-following": true,
-    "get-user-likes": true
+    "get-user": false,
+    "get-user-followers": false,
+    "get-user-following": false,
+    "get-user-likes": false,
+    "get-user-tweets": true,
+    "get-user-media": true,
+    "search-users": true
   },
   "output-file": "Reynolds"
 }

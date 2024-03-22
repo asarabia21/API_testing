@@ -19,6 +19,10 @@ get_user_enabled = methods_config.get('get-user', False)
 get_user_followers_enabled = methods_config.get('get-user-followers', False)
 get_user_following_enabled = methods_config.get('get-user-following', False)
 get_user_likes_enabled = methods_config.get('get-user-likes', False)
+get_user_tweets_enabled = methods_config.get('get-user-tweets', False)
+get_user_media_enabled = methods_config.get('get-user-media', False)
+search_users_enabled = methods_config.get('search-users', False)
+
 
 # Get the output file name
 output_file = config.get('output-file', 'output_data.json')
@@ -73,12 +77,30 @@ def get_following(url, querystring, username):
     response = requests.get(url, headers=headers, params=querystring)
     write_response_to_file(response, output_file, "getfollowing")
 
-
 def get_likes(url, username):
     print(f"Getting likes for {username}")
     url += "/user-likes"
     response = requests.get(url, headers=headers, params=querystring)
     write_response_to_file(response, output_file, "getlikes")
+
+def get_tweets(url, username):
+    print(f"Getting tweets for {username}")
+    url += "/user-tweets"
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "gettweets")
+
+def get_media(url, username):
+    print(f"Getting media for {username}")
+    url += "/user-media"
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "getmedia")
+
+def search_users(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-users"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchusers")
 
 # Execute methods based on the configuration
 if (get_user_enabled):
@@ -92,5 +114,14 @@ if (get_user_following_enabled):
 
 if (get_user_likes_enabled):
     get_likes(url, target_username)
+
+if (get_user_tweets_enabled):
+    get_tweets(url, target_username)
+
+if (get_user_media_enabled):
+    get_media(url, target_username)
+
+if (search_users_enabled):
+    search_users(url, querystring, target_username)
 
 print("User data saved successfully.")
