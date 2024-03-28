@@ -55,8 +55,8 @@ def get_user_posts_info(username, access_token):
     else:
         print("Error:", response.text)
 
-# Example usage:
-username = "leomessi"  # Replace with the desired Instagram username
+
+username = "leomessi"  
 access_token = "IGQWROV0R0clRzalU5eGtEY3JYOEpndkdJaFZAKZAXlPMngycUR5NEpmSGZABRkZA6eldGdTFudVBQTUpiZAVJRTHBrTE1rRGg1VUVQMTE4YjM0VTBPR0d5NUV4WFdNa0RhR1ZAKVFZArdHNVcmVsMEx2NUttMkZAzUUd6RncZD"  # Replace with your obtained Access Token
 posts_info = get_user_posts_info(username, access_token)
 
