@@ -11,7 +11,7 @@ In TwttrAPI.py
 
 USE:
 
-In config file
+In twitterconfig.json 
 
     modify target username with a valid twitter handle or some words to put in the search bar to use the search tools
     toggle desired requests as either "yes" or "no"
@@ -19,6 +19,6 @@ In config file
 
 Run TwttrAPI.py with the following caveats: 
 
-Free plan only allows for 100 requests a month under the "Scraping & Searching" Category
+Free plan only allows for 100 requests a month under the "Scraping & Searching" Category. 
 Any get request is limited to the first 20 responses in any list and can't be modified with a free account
 
