@@ -1,13 +1,16 @@
 {
-  "target-username": "VancityReynolds",
+  "target-username": "US military base",
   "endpoints": {
     "get-user": false,
     "get-user-followers": false,
     "get-user-following": false,
     "get-user-likes": false,
-    "get-user-tweets": true,
-    "get-user-media": true,
-    "search-users": true
+    "get-user-tweets": false,
+    "get-user-media": false,
+    "search-users": false,
+    "search-top": false,
+    "search-latest": false,
+    "search-images": true
   },
-  "output-file": "Reynolds"
+  "output-file": "US military base"
 }
