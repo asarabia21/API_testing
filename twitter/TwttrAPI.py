@@ -6,6 +6,7 @@ def read_config_file(file_path):
         config_data = json.load(file)
     return config_data
 
+#MODIFY PATH TO CONFIG.json file
 config = read_config_file('C:\\Users\\adams\\Documents\\GitHub\\API_testing\\twitter\\twitterconfig.json')
 
 # Get the target username
@@ -22,7 +23,9 @@ get_user_likes_enabled = methods_config.get('get-user-likes', False)
 get_user_tweets_enabled = methods_config.get('get-user-tweets', False)
 get_user_media_enabled = methods_config.get('get-user-media', False)
 search_users_enabled = methods_config.get('search-users', False)
-
+search_top_enabled = methods_config.get('search-top', False)
+search_latest_enabled = methods_config.get('search-latest', False)
+search_images_enabled = methods_config.get('search-images', False)
 
 # Get the output file name
 output_file = config.get('output-file', 'output_data.json')
@@ -51,6 +54,7 @@ url = "https://twttrapi.p.rapidapi.com"
 
 querystring = {"username": target_username}
 
+#CHANGE KEY HERE
 headers = {
 	"X-RapidAPI-Key": "b3e50ce4e9mshf8fdee8d57b9412p190784jsnd95c64fe16bb",
 	"X-RapidAPI-Host": "twttrapi.p.rapidapi.com"
@@ -102,6 +106,27 @@ def search_users(url, querystring, username):
     response = requests.get(url, headers=headers, params=querystring)
     write_response_to_file(response, output_file, "searchusers")
 
+def search_top(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-top"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchtop")
+
+def search_latest(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-latest"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchlatest")
+
+def search_images(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-images"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchimages")
+
 # Execute methods based on the configuration
 if (get_user_enabled):
     get_user(url, target_username)
@@ -123,5 +148,14 @@ if (get_user_media_enabled):
 
 if (search_users_enabled):
     search_users(url, querystring, target_username)
+
+if (search_top_enabled):
+    search_top(url, querystring, target_username)
+
+if (search_latest_enabled):
+    search_latest(url, querystring, target_username)
+
+if (search_images_enabled):
+    search_images(url, querystring, target_username)
 
 print("User data saved successfully.")

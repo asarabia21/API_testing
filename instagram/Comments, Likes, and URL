@@ -1,0 +1,35 @@
+import instaloader
+
+def get_user_posts(username):
+    L = instaloader.Instaloader()
+    try:
+        profile = instaloader.Profile.from_username(L.context, username)
+    except Exception as e:
+        print("Error:", e)
+        return []
+
+    posts_data = []
+    for i, post in enumerate(profile.get_posts()):
+        if i >= 5:
+            break
+        post_data = {
+            'id': post.shortcode,
+            'comments_count': post.comments,
+            'like_count': post.likes,
+            'url': f"https://www.instagram.com/p/{post.shortcode}/"
+        }
+        posts_data.append(post_data)
+
+    return posts_data
+
+if __name__ == "__main__":
+    username = "leomessi"
+    user_posts = get_user_posts(username)
+
+    print("User's Posts:")
+    for post in user_posts:
+        print("Post ID:", post['id'])
+        print("Comments Count:", post['comments_count'])
+        print("Likes Count:", post['like_count'])
+        print("URL:", post['url'])
+        print()
