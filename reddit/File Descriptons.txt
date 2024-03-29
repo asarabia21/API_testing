@@ -1,0 +1,21 @@
+The API access and user access information contained in the config file or in the script itself is for a general purpose account created for testing and can be used as necessary even if new scripts are desired. 
+
+
+subreddit_image_searches 
+Offers image search across a subreddit via a couple of options, both can run simultaneously. The first method is a search of the selected subreddit by a keyword. Images are stored in a directory of the user's choosing. 
+The second method is more broad in scope and searches all of a reddit. Returned results are saved in the current directory.
+
+
+subreddit_keyword_search
+This is a simple search tool that returns links to post within a given subreddit. It’s real benefit is the ability to write all the returned links to a csv file for later reference. 
+
+
+subreddit_posts_data
+A search by within a subreddit to gather the top posts and comments, and displays various data points regarding each post.
+
+
+user_posts_comments_search
+This script pulls a user’s posts and comments. There is at present commented out lines for fetching a user’s subscriptions as well. This however appears not to be a feature of Reddit’s API. However is such an avenue is available it is a helpful addition.
+
+
+

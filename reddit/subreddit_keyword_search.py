@@ -9,7 +9,8 @@ secret = "X-JF_RAbNYo-S76wYqW0iwbumwzdgQ"
 
 # Reddit user credentials
 username = "estabanmagnifico"
-password = "Monkey5000"
+password = "thisisinsecure"
+
 
 # Reddit API access token
 auth = requests.auth.HTTPBasicAuth(client_id, secret)
@@ -36,8 +37,3 @@ for q in q_list:
 	with open(f"{q.replace(' ', '-')}.csv", "w", newline='') as file:
 		writer = csv.writer(file)
 		writer.writerows(permalink_list)
-
-	
-
-
-
