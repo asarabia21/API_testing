@@ -1,5 +1,5 @@
 {
-  "target-username": "US military base",
+  "target-username": "United States Military",
   "endpoints": {
     "get-user": false,
     "get-user-followers": false,
@@ -10,7 +10,9 @@
     "search-users": false,
     "search-top": false,
     "search-latest": false,
-    "search-images": true
+    "search-images": false,
+    "search-videos": true,
+    "search-suggestions": true
   },
-  "output-file": "US military base"
+  "output-file": "United States Military"
 }

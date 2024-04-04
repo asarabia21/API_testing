@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 def read_config_file(file_path):
     with open(file_path, 'r') as file:
@@ -26,6 +27,8 @@ search_users_enabled = methods_config.get('search-users', False)
 search_top_enabled = methods_config.get('search-top', False)
 search_latest_enabled = methods_config.get('search-latest', False)
 search_images_enabled = methods_config.get('search-images', False)
+search_videos_enabled = methods_config.get('search-videos', False)
+search_suggestions_enabled = methods_config.get('search-suggestions', False)
 
 # Get the output file name
 output_file = config.get('output-file', 'output_data.json')
@@ -36,8 +39,16 @@ def write_response_to_file(api_response, output_file, method_name):
         # Convert API response to JSON
         response_json = api_response.json()
 
+        # Get the current directory
+        current_directory = os.path.dirname(os.path.realpath(__file__))
+
+        # Create the 'output' folder if it doesn't exist
+        output_directory = os.path.join(current_directory, 'output')
+        if not os.path.exists(output_directory):
+            os.makedirs(output_directory)
+
         # Construct output filename with method name
-        output_filename = f"{output_file}_{method_name}.json"
+        output_filename = os.path.join(output_directory, f"{output_file}_{method_name}.json")
 
         # Write JSON response to file
         with open(output_filename, 'w') as file:
@@ -127,6 +138,20 @@ def search_images(url, querystring, username):
     response = requests.get(url, headers=headers, params=querystring)
     write_response_to_file(response, output_file, "searchimages")
 
+def search_videos(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-videos"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchvideos")
+
+def search_suggestions(url, querystring, username):
+    print(f"Searching for {username}")
+    url += "/search-suggestions"
+    querystring['query'] = username
+    response = requests.get(url, headers=headers, params=querystring)
+    write_response_to_file(response, output_file, "searchsuggestions")
+
 # Execute methods based on the configuration
 if (get_user_enabled):
     get_user(url, target_username)
@@ -157,5 +182,11 @@ if (search_latest_enabled):
 
 if (search_images_enabled):
     search_images(url, querystring, target_username)
+
+if (search_videos_enabled):
+    search_videos(url, querystring, target_username)
+
+if (search_suggestions_enabled):
+    search_suggestions(url, querystring, target_username)
 
 print("User data saved successfully.")
