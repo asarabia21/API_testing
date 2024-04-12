@@ -1,0 +1,23 @@
+import instaloader
+
+
+L = instaloader.Instaloader()
+
+
+
+
+profile = instaloader.Profile.from_username(L.context, "leomessi")
+
+
+count = 0
+
+
+for post in profile.get_tagged_posts():
+    print("Post ID:", post.mediaid)
+    print("Caption:", post.caption)
+    print("Likes:", post.likes)
+    print("URL:", post.url)
+    print("-----------------------------------------")
+    count += 1
+    if count >= 10:  
+        break
